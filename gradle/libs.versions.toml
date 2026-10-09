@@ -1,0 +1,107 @@
+# ══════════════════════════════════════════════════════════════════
+# MovielyKmp 版本目录（Version Catalog）
+# 基于 component-moviely/libs.versions.toml，移除 Hilt，新增 Koin / KMP 依赖
+# ══════════════════════════════════════════════════════════════════
+
+[versions]
+kotlin = "2.0.20"
+agp = "8.5.2"
+compose-bom = "2024.09.00"
+room = "2.8.4"
+okhttp = "4.12.0"
+kotlinx-serialization = "1.7.1"
+kotlinx-coroutines = "1.8.1"
+ktor = "3.0.3"
+paging = "3.3.0"
+coil = "2.7.0"
+navigation = "2.8.0"
+datastore = "1.1.1"
+lifecycle = "2.8.0"
+accompanist = "0.34.0"
+core-ktx = "1.13.1"
+activity-compose = "1.9.2"
+koin = "4.0.0"
+
+[libraries]
+# Core AndroidX
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+
+# Compose BOM
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" }
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+
+# Lifecycle
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+
+# Navigation
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+
+# Koin（替代 Hilt 的 DI 框架，原生支持 KMP）
+# 🍎 UIKit 类比：Koin 类似 UIKit 中手动 DI + Factory 模式，但用 DSL 声明依赖图
+#   - koin-core：纯 Kotlin 核心，commonMain 可用
+#   - koin-android：Android 平台扩展（Application/Context 感知）
+#   - koin-androidx-compose：Compose 集成（koinViewModel() 等修饰符）
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+
+# Room（KMP 多平台版，2.8+ 原生支持 commonMain 中的 @Entity/@Dao）
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+
+# Network - Ktor（原生多平台 HTTP 客户端，替代 OkHttp/Retrofit）
+# 🍎 UIKit 类比：Ktor 类似 URLSession 的跨平台版，commonMain 写一次，各平台自动选引擎
+#   - Android 端用 OkHttp 引擎（保持与原工程一致的代理行为）
+#   - iOS 端用 Darwin 引擎（底层是 NSURLSession，自动支持系统代理）
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+
+# OkHttp（Ktor Android 引擎底层使用，锁定 4.12.0 避免 metadata mismatch）
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+# Serialization
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+# Coroutines
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+
+# Paging
+paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
+
+# Image
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+# DataStore
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+# Accompanist
+accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version = "2.0.20-1.0.25" }
+room = { id = "androidx.room", version.ref = "room" }
+

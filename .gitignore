@@ -1,0 +1,25 @@
+# Android
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Gradle
+build/
+!gradle-wrapper.jar
+
+# Kotlin
+*.class
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
